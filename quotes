@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html><head>
+	<title>Random Quotes Generator</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<style type="text/css">
+	.centeredDiv{
+	    font-size: 24px;
+	    position: fixed;
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+	    border-radius: 8px;
+	    background: rgba(255, 255, 255, 0.5);
+	    padding: 8px;
+	}
+	body{
+		background: #7289da;
+	}
+	.btn button {
+	    padding: 8px;
+	    cursor: pointer;
+	}
+</style></head>
+
+<body>
+
+
+<div class="centeredDiv">
+	<div class="btn">
+		<button onclick="refreshQuote()">Generate quote</button>
+	</div>
+	<span id="quote">Click on the button above</span>
+</div>
+
+
+<script type="text/javascript">
+	function refreshQuote(){
+		var url = 'https://type.fit/api/quotes';
+		$.get(url, function( data ) {
+			data = JSON.parse(data);
+			var quoteNumber =  Math.floor(Math.random()*data.length)
+			document.getElementById('quote').innerHTML = data[quoteNumber].text;
+		});
+	}
+</script>
+
+
+</body></html>
